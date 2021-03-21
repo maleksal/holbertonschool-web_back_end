@@ -10,4 +10,4 @@ def to_kv(k: str, v: Union[int, float]) -> tuple:
     :return: (str, square(v) -> float)
     """
     from math import sqrt
-    return Tuple[k, float(sqrt(v)]
+    return Tuple[k, float(sqrt(v))]
