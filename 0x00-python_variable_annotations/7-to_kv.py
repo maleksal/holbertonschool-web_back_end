@@ -11,4 +11,3 @@ def to_kv(k: str, v: Union[int, float]) -> tuple:
     """
     from math import sqrt
     return k, float(sqrt(v))
-
