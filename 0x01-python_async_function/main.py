@@ -2,12 +2,8 @@
 
 import asyncio
 
-task_wait_random = __import__('3-tasks').task_wait_random
+task_wait_n = __import__('4-tasks').task_wait_n
 
-
-async def test(max_delay: int) -> float:
-    task = task_wait_random(max_delay)
-    await task
-    print(task.__class__)
-
-asyncio.run(test(5))
+n = 5
+max_delay = 6
+print(asyncio.run(task_wait_n(n, max_delay)))
