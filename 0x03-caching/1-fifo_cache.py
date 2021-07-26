@@ -23,7 +23,7 @@ class FIFOCache(BaseCashing):
 
                 ikey = list(self.cache_data)[0][0]
                 self.cache_data.pop(ikey, None)
-                print("DISCARD: {}\n".format(ikey))
+                print("DISCARD:{}".format(ikey))
 
     def get(self, key):
         """ Get an item by key
