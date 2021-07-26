@@ -15,15 +15,18 @@ class FIFOCache(BaseCashing):
     def put(self, key, item):
         """ Add item in the cache using FIFO
         """
+        dict_keys = list(self.cache_data.keys())
+
         if key and item:
 
-            self.cache_data[key] = item
+            if len(self.cache_data) >= BaseCashing.MAX_ITEMS and \
+                    key not in dict_keys:
 
-            if len(self.cache_data) > BaseCashing.MAX_ITEMS:
-
-                ikey = list(self.cache_data)[0][0]
+                ikey = dict_keys[0]
                 print("DISCARD:", ikey)
                 self.cache_data.pop(ikey)
+
+            self.cache_data[key] = item
 
     def get(self, key):
         """ Get an item by key
