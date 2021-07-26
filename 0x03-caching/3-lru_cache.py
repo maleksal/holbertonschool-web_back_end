@@ -24,7 +24,7 @@ class LRUCache(BaseCaching):
             if key in keyss:
                 self.cache_data.pop(key)
 
-            elif len(self.cache_data.items()) >= self.MAX_ITEMS and \
+            elif len(keyss) >= self.MAX_ITEMS and \
                     key not in keyss:
 
                 item = list(keyss)[0]
