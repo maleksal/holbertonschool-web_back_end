@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ LRU Caching modules
 """
-
+from collections import OrderedDict
 from base_caching import BaseCaching
 
 
@@ -13,6 +13,7 @@ class LRUCache(BaseCaching):
         """ Initiliaze
         """
         super().__init__()
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """ Add item in the cache using FIFO
