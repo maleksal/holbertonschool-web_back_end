@@ -17,38 +17,26 @@ class LRUCache(BaseCaching):
     def put(self, key, item):
         """ Add item in the cache using FIFO
         """
-        keyss = self.cache_data.keys()
 
         if key and item:
 
-            if key in keyss:
-                self.cache_data.pop(key)
-
-            elif len(keyss) >= self.MAX_ITEMS and \
-                    key not in keyss:
-
-                item = list(keyss)[0]
-
-                self.cache_data.pop(item)
-
-                print("DISCARD: {}".format(item))
-
             self.cache_data[key] = item
+
+        if len(self.cache_data.keys()) > BaseCaching.MAX_ITEMS:
+
+            ritem = list(self.cache_data.popitem(last=False))[0]
+
+            print("DISCARD:", ritem)
+
+            self.cache_data.move_to_end(key, last=True)
 
     def get(self, key):
         """ Get an item by key
         """
+        if key in self.cache_data.keys():
 
-        if key is None:
+            self.cache_data.move_to_end(key, last=True)
 
-            return None
+            return self.cache_data[key]
 
-        itemKeys = self.cache_data.keys()
-
-        if key in itemKeys:
-
-            value = self.cache_data.pop(key)
-
-            self.cache_data[key] = value
-
-        return self.cache_data.get(key, None)
+        return None
