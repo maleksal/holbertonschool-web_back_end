@@ -22,7 +22,7 @@ class FIFOCache(BaseCashing):
             if len(self.cache_data) > BaseCashing.MAX_ITEMS:
 
                 ikey = list(self.cache_data)[0][0]
-                del self.cache_data[ikey]
+                self.cache_data.pop(ikey, None)
                 print("DISCARD: {}\n".format(ikey))
 
     def get(self, key):
