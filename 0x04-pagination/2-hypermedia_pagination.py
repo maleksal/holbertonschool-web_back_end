@@ -55,11 +55,12 @@ class Server:
         """ Returns a dictionary containing the following key-value pairs.
         """
         d = self.get_page(page, page_size)
+        np = None if page_size * page + 1 > len(self.__dataset) else page + 1
         result = {
             "page_size": len(d),
             "page": page,
             "data": d,
-            "next_page": None if len(d) >= len(self.__dataset) else page + 1,
+            "next_page": np,
             "prev_page": None if page == 1 else page - 1,
             "total_pages": math.ceil(len(self.__dataset) / page_size)
         }
