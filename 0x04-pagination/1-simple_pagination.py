@@ -4,8 +4,6 @@ Simple pagination module.
 """
 
 import csv
-import math
-from os import EX_NOTFOUND
 from typing import List
 
 
@@ -41,7 +39,7 @@ class Server:
         takes two arguments page with default value 1 and page_size with 10.
         """
         assert type(page) == int and type(page_size) == int
-        assert page > 1 and page_size > 1
+        assert page > 0 and page_size > 0
 
         # start, end indexes
         srange, erange = index_range(page, page_size)
@@ -49,5 +47,5 @@ class Server:
         dataset = self.dataset()
 
         if srange <= len(dataset) and erange <= len(dataset):
-            return dataset[srange: erange + 1]
+            return dataset[srange: erange]
         return []
