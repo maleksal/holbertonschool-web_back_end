@@ -4,6 +4,7 @@ Simple pagination module.
 """
 
 import csv
+import math
 from typing import Dict, List
 
 
@@ -53,7 +54,6 @@ class Server:
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """ Returns a dictionary containing the following key-value pairs.
         """
-        s, e = index_range(page, page_size)
         d = self.get_page(page, page_size)
         result = {
             "page_size": len(d),
@@ -61,6 +61,6 @@ class Server:
             "data": d,
             "next_page": None if len(d) >= len(self.__dataset) else page + 1,
             "prev_page": None if page == 1 else page - 1,
-            "total_pages": len(self.__dataset) // page_size
+            "total_pages": math.ceil(len(self.__dataset) / page_size)
         }
         return result
