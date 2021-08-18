@@ -36,10 +36,10 @@ class Auth:
         """Locating the user by email. If it exists
         """
         try:
-            located_user_email = self._db.find_user_by(email=email)
+            l_user = self._db.find_user_by(email=email)
             valid_user = bcrypt.checkpw(
-                password.encode('utf-8'),
-                located_user_email.hashed_password)
+                password=password.encode('utf-8'),
+                hashed_password=l_user.hashed_password)
             return True if valid_user else False
         except NoResultFound:
             return False
