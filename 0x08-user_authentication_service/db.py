@@ -89,4 +89,4 @@ class DB:
 
                 setattr(user, key, value) for key, value in kwargs.items()
         )
-        session.commit()
+        self._session.commit()
