@@ -73,8 +73,6 @@ class DB:
         if not kwargs:
             return None
 
-        session = self._session
-
         user = self.find_user_by(id=user_id)
 
         data = User.__table__.columns.keys()
@@ -85,7 +83,7 @@ class DB:
 
                 raise ValueError
 
-        noeff = (
+        (
 
                 setattr(user, key, value) for key, value in kwargs.items()
         )
