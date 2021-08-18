@@ -64,3 +64,29 @@ class DB:
             if not user:
                 raise NoResultFound
             return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """
+        Takes as argument a required user_id integer
+        and arbitrary keyword arguments, and returns None
+        """
+        if not kwargs:
+            return None
+
+        session = self._session
+
+        user = self.find_user_by(id=user_id)
+
+        data = User.__table__.columns.keys()
+
+        for key in kwargs.keys():
+
+            if key not in data:
+
+                raise ValueError
+
+        noeff = (
+
+                setattr(user, key, value) for key, value in kwargs.items()
+        )
+        session.commit()
