@@ -28,8 +28,7 @@ class TestGithubOrgClient(unittest.TestCase):
 
     def test_public_repos_url(self):
         '''
-        Test that the result of _public_repos_url
-        is the expected one based on the mocked payload.
+        Test that the result of _public_repos_url.
         '''
 
         data = {
