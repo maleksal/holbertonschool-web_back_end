@@ -88,5 +88,35 @@ class TestGithubOrgClient(unittest.TestCase):
         )
 
 
+@parameterized_class(
+    ("org_payload", "repos_payload", "expected_repos", "apache2_repos"),
+    TEST_PAYLOAD
+)
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """ example payloads anything is anything  """
+    @classmethod
+    def setUpClass(cls):
+        """
+        method to setup patcher.
+        """
+        cls.get_patcher, cls.mock = (
+
+            patch('requests.get'),
+            cls.get_patcher.start()
+
+        )
+        cls.mock.return_value.json.side_effect = [
+
+            cls.org_payload, cls.repos_payload,
+            cls.org_payload, cls.repos_payload,
+
+        ]
+
+    @classmethod
+    def tearDownClass(cls):
+        """method stops patcher """
+        cls.get_patcher.stop()
+
+
 if __name__ == '__main__':
     unittest.main()
