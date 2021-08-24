@@ -83,7 +83,7 @@ class TestGithubOrgClient(unittest.TestCase):
         G_client = GithubOrgClient("facebook")
 
         self.assertEqual(
-            (G_client.has_license(repo, license)),
+            G_client.has_license(repo, license),
             expected
         )
 
