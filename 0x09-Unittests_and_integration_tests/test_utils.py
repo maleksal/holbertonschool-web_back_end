@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 '''Tests
 '''
@@ -9,7 +8,6 @@ from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 from unittest import mock
 from unittest.mock import patch
-
 
 
 class TestAccessNestedMap(unittest.TestCase):
