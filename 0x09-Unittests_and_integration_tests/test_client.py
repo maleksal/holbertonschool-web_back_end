@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """TestGithubOrgClient class."""
+    """TestGithubOrgClient class for client.GithubOrgClient."""
 
     @parameterized.expand([
         ("google", {}),
