@@ -72,6 +72,21 @@ class TestGithubOrgClient(unittest.TestCase):
 
             mock_o.assert_called_once()
 
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False)
+    ])
+    def test_has_license(self, repo, license, expected):
+        '''
+        Test test_has_license method.
+        '''
+        G_client = GithubOrgClient("facebook")
+
+        self.assertEqual(
+            (G_client.has_license(repo, license)),
+            expected
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
