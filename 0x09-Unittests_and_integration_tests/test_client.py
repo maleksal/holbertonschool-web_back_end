@@ -33,20 +33,44 @@ class TestGithubOrgClient(unittest.TestCase):
 
         data = {
             "url": "facebook",
-            "repos_url": "http://taylorswift.com"
+            "repos_url": "http://google.com"
         }
 
         with patch.object(GithubOrgClient, "org",
                           new_callable=Property, return_value=data) as mock_o:
 
-            github_client = GithubOrgClient(data.get("url"))
+            G_client = GithubOrgClient(data.get("url"))
 
             mock_o.assert_called_once()
 
             self.assertEqual(
-                github_client._public_repos_url,
+                G_client._public_repos_url,
                 data.get("repos_url")
             )
+
+    @patch("client.get_json")
+    def test_public_repos(self, get_patch):
+        '''
+        Test list of repos is expected from payload.
+        '''
+
+        get_patch.return_value = [{"name": "google"},
+                                  {"name": "abc"}]
+
+        with patch.object(GithubOrgClient, "_public_repos_url",
+                          new_callable=Property,
+                          return_value="http://google.com") as mock_o:
+
+            G_client = GithubOrgClient("facebook")
+
+            self.assertEqual(
+                G_client.public_repos(),
+                ["google", "abc"]
+            )
+
+            get_patch.assert_called_once()
+
+            mock_o.assert_called_once()
 
 
 if __name__ == '__main__':
