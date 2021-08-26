@@ -9,7 +9,7 @@ babel = Babel(app)
 
 
 class Config:
-    """Cinfig for available languages."""
+    """Config for available languages."""
 
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = 'en'
@@ -21,7 +21,7 @@ app.config.from_object(Config)
 
 @app.route('/')
 def index():
-    """display 1-index.html"""
+    """display page"""
     return render_template('1-index.html')
 
 
