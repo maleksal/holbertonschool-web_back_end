@@ -27,6 +27,7 @@ def hello():
 @babel.localeselector
 def get_locale():
     """determine language."""
+    locale = request.args.get("locale")
     if locale:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
@@ -34,4 +35,3 @@ def get_locale():
 
 if __name__ == '__main__':
     app.run()
-    locale = request.args.get("locale")
