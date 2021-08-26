@@ -5,7 +5,6 @@ from flask import Flask, render_template, request
 from flask_babel import Babel
 from flask import g
 
-
 app = Flask(__name__)
 babel = Babel(app)
 
@@ -65,6 +64,21 @@ def get_user():
 def before_request():
     '''set a user.'''
     g.user = get_user()
+
+
+@babel.timezoneselector
+def get_timezone():
+    ''' timezone '''
+    time = request.args.get('timezone')
+    if time in pytz.all_timezones:
+        return time
+    else:
+        user_id = request.args.get('login_as')
+        time = users[int(user_id)]['timezone']
+        if time in pytz.all_timezones:
+            return time
+        raise pytz.exceptions.UnknownTimeZoneError
+    return app.config['BABEL_DEFAULT_TIMEZONE']
 
 
 if __name__ == '__main__':
