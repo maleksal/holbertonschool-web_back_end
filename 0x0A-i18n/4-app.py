@@ -2,7 +2,7 @@
 """myroute module"""
 
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext
+from flask_babel import Babel
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -21,7 +21,7 @@ app.config.from_object(Config)
 @app.route('/')
 def hello():
     """render html file"""
-    return render_template('3-index.html')
+    return render_template('4-index.html')
 
 
 @babel.localeselector
