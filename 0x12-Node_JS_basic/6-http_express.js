@@ -7,8 +7,6 @@ app.get('/', (request, response) => {
   response.send('Hello Holberton School!');
 });
 
-app.listen(p, () => {
-  console.log(`Example app listening at http://localhost:${p}`);
-});
+app.listen(p)
 
 module.exports = app;
