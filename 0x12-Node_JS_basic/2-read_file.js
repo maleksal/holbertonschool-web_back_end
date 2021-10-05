@@ -19,9 +19,9 @@ const countStudents = (path) => {
       Classes[line[3]].push(line[0]);
     });
 
-    Classes.forEach((cls) => {
+    for (const cls in Classes) {
       if (cls) console.log(`Number of students in ${cls}: ${Classes[cls].length}. List: ${Classes[cls].join(', ')}`);
-    });
+    }
   } catch (error) {
     throw new Error('Cannot load the database');
   }
