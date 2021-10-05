@@ -9,18 +9,12 @@ app.get('/', (request, response) => {
 });
 
 app.get('/students', (request, response) => {
-  response.setHeader('Content-Type', 'text/plain');
-  response.write('This is the list of our students\n');
-
   countStudents(process.argv[2]).then((result) => {
-    response.end(result);
+    response.send(`This is the list of our students\n${result.join('\n')}`);
   }).catch((error) => {
-    response.end(error.message);
+    response.send(error.message);
   });
 });
 
-app.listen(p, () => {
-  console.log(`Example app listening at http://localhost:${p}`);
-});
-
+app.listen(p);
 module.exports = app;
