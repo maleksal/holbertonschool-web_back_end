@@ -1,2 +1,2 @@
 // displays the number of documents
-db.collection("school").count()
+db.school.count()
