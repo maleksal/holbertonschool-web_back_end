@@ -31,3 +31,8 @@ class Auth:
         """Returns None - request will be the Flask request object
         """
         return None
+
+
+class BasicAuth(Auth):
+    """BasicAuth class.
+    """
