@@ -9,11 +9,11 @@ class BasicAuth(Auth):
     """BasicAuth class.
     """
 
-    def extract_base64_authorization_header(self, authorization_header: str) -> str:
+    def extract_base64_authorization_header(self, auth_header: str) -> str:
         """Returns Base64 of the Authorization header
         """
-        if authorization_header is None\
-                or type(authorization_header) != str\
-                or not authorization_header.startswith("Basic "):
+        if auth_header is None\
+                or type(auth_header) != str\
+                or not auth_header.startswith("Basic "):
             return None
-        return authorization_header.split(" ")[1]
+        return auth_header.split(" ")[1]
