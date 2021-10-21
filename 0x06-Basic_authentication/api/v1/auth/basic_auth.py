@@ -3,6 +3,7 @@
 Manage API authentication.
 """
 from api.v1.auth.auth import Auth
+from typing import Tuple
 import base64
 
 
@@ -30,3 +31,13 @@ class BasicAuth(Auth):
                 b64_auth_header.encode('ascii')).decode('ascii')
         except Exception as e:
             return None
+
+    def extract_user_credentials(self, db64_auth: str) -> Tuple[str, str]:
+        """Returns the user email and password from the B4 decoded value.
+        """
+        if db64_auth is None\
+                or type(db64_auth) != str\
+                or ":" not in db64_auth:
+            return None, None
+        values = db64_auth.split(":")
+        return values[0], values[1]
