@@ -3,6 +3,8 @@
 Manage API authentication.
 """
 from api.v1.auth.auth import Auth
+from models.user import User
+from typing import TypeVar as T
 from typing import Tuple
 import base64
 
@@ -41,3 +43,21 @@ class BasicAuth(Auth):
             return None, None
         values = db64_auth.split(":")
         return values[0], values[1]
+
+    def user_object_from_credentials(self, ue: str, up: str) -> T('User'):
+        """Returns the User instance based on his email and password.
+        """
+        # ue: user_email
+        # up: user_password
+        if ue is None or type(ue) != str\
+                or up is None or type(up) != str:
+            return None
+        try:
+            users = User.search({'email': ue})
+            if users:
+                for user in users:
+                    if user.is_valid_password(up):
+                        return user
+        except BaseException:
+            return None
+        return None
